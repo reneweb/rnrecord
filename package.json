@@ -1,0 +1,18 @@
+
+{
+  "name": "rnrecord",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "keywords": [
+    "react-native", "db", "sql", "active record"
+  ],
+  "author": "reneweb",
+  "license": "Apache-2.0",
+  "peerDependencies": {
+    "react-native": ">=0.38.0"
+  },
+  "devDependencies": {
+    "react-native": "0.38.0"
+  }
+}
