@@ -1,10 +1,11 @@
 
-package com.reactlibrary;
+package rnrecord;
 
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.ReadableMap;
 
 public class RnRecordModule extends ReactContextBaseJavaModule {
 
@@ -18,5 +19,30 @@ public class RnRecordModule extends ReactContextBaseJavaModule {
   @Override
   public String getName() {
     return "RnRecord";
+  }
+
+  @ReactMethod
+  public void save(ReadableMap props, Promise promise) {
+
+  }
+
+  @ReactMethod
+  public void update(ReadableMap props, Promise promise) {
+
+  }
+
+  @ReactMethod
+  public void remove(ReadableMap props, Promise promise) {
+
+  }
+
+  @ReactMethod
+  public void findAll(String tableName, Promise promise) {
+
+  }
+
+  @ReactMethod
+  public void find(String tableName, ReadableMap query, Promise promise) {
+
   }
 }
