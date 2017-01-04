@@ -7,15 +7,15 @@ export default class RnRecord {
     id: Number;
 
     save(): Number {
-        return NativeRnRecord.save(this.getProperties());
+        return NativeRnRecord.save(this.constructor.name, this.getProperties());
     }
 
     update(): Boolean {
-        return NativeRnRecord.update(this.getProperties());
+        return NativeRnRecord.update(this.constructor.name, this.getProperties());
     }
 
     remove(): Boolean {
-        return NativeRnRecord.remove(this.getProperties());
+        return NativeRnRecord.remove(this.constructor.name, this.getProperties());
     }
 
     static findAll(): Array {

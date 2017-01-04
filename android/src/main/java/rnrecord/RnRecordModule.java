@@ -22,17 +22,17 @@ public class RnRecordModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void save(ReadableMap props, Promise promise) {
+  public void save(String tableName, ReadableMap props, Promise promise) {
 
   }
 
   @ReactMethod
-  public void update(ReadableMap props, Promise promise) {
+  public void update(String tableName, ReadableMap props, Promise promise) {
 
   }
 
   @ReactMethod
-  public void remove(ReadableMap props, Promise promise) {
+  public void remove(String tableName, ReadableMap props, Promise promise) {
 
   }
 
