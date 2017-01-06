@@ -1,19 +1,30 @@
 
 package rnrecord;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+import com.facebook.react.bridge.GuardedAsyncTask;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableMapKeySetIterator;
+import com.facebook.react.bridge.ReadableType;
+import rnrecord.commands.SaveCommand;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RnRecordModule extends ReactContextBaseJavaModule {
 
   private final ReactApplicationContext reactContext;
+  private final SaveCommand saveCommand;
 
   public RnRecordModule(ReactApplicationContext reactContext) {
     super(reactContext);
     this.reactContext = reactContext;
+    saveCommand = new SaveCommand(reactContext);
   }
 
   @Override
@@ -22,8 +33,8 @@ public class RnRecordModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void save(String tableName, ReadableMap props, Promise promise) {
-
+  public void save(final String tableName, ReadableMap props, final Promise promise) {
+    saveCommand.save(tableName, props, promise);
   }
 
   @ReactMethod
