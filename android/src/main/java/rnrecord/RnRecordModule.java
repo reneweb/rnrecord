@@ -11,6 +11,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.ReadableType;
+import rnrecord.commands.DeleteCommand;
 import rnrecord.commands.SaveCommand;
 import rnrecord.commands.UpdateCommand;
 
@@ -22,12 +23,14 @@ public class RnRecordModule extends ReactContextBaseJavaModule {
   private final ReactApplicationContext reactContext;
   private final SaveCommand saveCommand;
   private final UpdateCommand updateCommand;
+  private final DeleteCommand deleteCommand;
 
   public RnRecordModule(ReactApplicationContext reactContext) {
     super(reactContext);
     this.reactContext = reactContext;
     saveCommand = new SaveCommand(reactContext);
     updateCommand = new UpdateCommand(reactContext);
+    deleteCommand = new DeleteCommand(reactContext);
   }
 
   @Override
@@ -47,7 +50,7 @@ public class RnRecordModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void remove(String tableName, ReadableMap props, Promise promise) {
-
+    deleteCommand.delete(tableName, props, promise);
   }
 
   @ReactMethod
