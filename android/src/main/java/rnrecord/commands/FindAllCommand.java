@@ -1,10 +1,13 @@
 package rnrecord.commands;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.facebook.react.bridge.GuardedAsyncTask;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableNativeArray;
 import rnrecord.RnRecordSQLiteHelper;
 
 /**
@@ -29,9 +32,24 @@ public class FindAllCommand {
                         .getInstance(reactContext)
                         .getWritableDatabase();
 
-                promise.resolve(db.rawQuery("select * from ?", new String[] {tableName} ));
+                promise.resolve(transformQueryResults(db.rawQuery("select * from ?", new String[] {tableName} )));
 
             }
         }.execute();
+    }
+
+    private ReadableArray transformQueryResults(Cursor cursor) {
+        WritableNativeArray result = new WritableNativeArray();
+        while(cursor.moveToNext()) {
+            WritableNativeArray row = new WritableNativeArray();
+            for (int i = 0; i < cursor.getCount(); i++) {
+                row.pushString(cursor.getString(i));
+            }
+            result.pushArray(row);
+        }
+
+        cursor.close();
+
+        return result;
     }
 }

@@ -1,17 +1,11 @@
 package rnrecord.commands;
 
-import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import com.facebook.react.bridge.GuardedAsyncTask;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.bridge.ReadableMapKeySetIterator;
-import com.facebook.react.bridge.ReadableType;
 import rnrecord.RnRecordSQLiteHelper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by reweber on 07/01/2017

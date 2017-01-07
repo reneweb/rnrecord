@@ -8,6 +8,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import rnrecord.commands.DeleteCommand;
 import rnrecord.commands.FindAllCommand;
+import rnrecord.commands.FindCommand;
 import rnrecord.commands.SaveCommand;
 import rnrecord.commands.UpdateCommand;
 
@@ -18,6 +19,7 @@ public class RnRecordModule extends ReactContextBaseJavaModule {
   private final UpdateCommand updateCommand;
   private final DeleteCommand deleteCommand;
   private final FindAllCommand findAllCommand;
+  private final FindCommand findCommand;
 
   public RnRecordModule(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -26,6 +28,7 @@ public class RnRecordModule extends ReactContextBaseJavaModule {
     updateCommand = new UpdateCommand(reactContext);
     deleteCommand = new DeleteCommand(reactContext);
     findAllCommand = new FindAllCommand(reactContext);
+    findCommand = new FindCommand(reactContext);
   }
 
   @Override
@@ -55,6 +58,6 @@ public class RnRecordModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void find(String tableName, ReadableMap query, Promise promise) {
-
+    findCommand.find(tableName, query, promise);
   }
 }
