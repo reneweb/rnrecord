@@ -12,6 +12,7 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.ReadableType;
 import rnrecord.commands.SaveCommand;
+import rnrecord.commands.UpdateCommand;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +21,13 @@ public class RnRecordModule extends ReactContextBaseJavaModule {
 
   private final ReactApplicationContext reactContext;
   private final SaveCommand saveCommand;
+  private final UpdateCommand updateCommand;
 
   public RnRecordModule(ReactApplicationContext reactContext) {
     super(reactContext);
     this.reactContext = reactContext;
     saveCommand = new SaveCommand(reactContext);
+    updateCommand = new UpdateCommand(reactContext);
   }
 
   @Override
@@ -39,7 +42,7 @@ public class RnRecordModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void update(String tableName, ReadableMap props, Promise promise) {
-
+    updateCommand.update(tableName, props, promise);
   }
 
   @ReactMethod
