@@ -1,22 +1,15 @@
 
 package rnrecord;
 
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
-import com.facebook.react.bridge.GuardedAsyncTask;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.bridge.ReadableMapKeySetIterator;
-import com.facebook.react.bridge.ReadableType;
 import rnrecord.commands.DeleteCommand;
+import rnrecord.commands.FindAllCommand;
 import rnrecord.commands.SaveCommand;
 import rnrecord.commands.UpdateCommand;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class RnRecordModule extends ReactContextBaseJavaModule {
 
@@ -24,6 +17,7 @@ public class RnRecordModule extends ReactContextBaseJavaModule {
   private final SaveCommand saveCommand;
   private final UpdateCommand updateCommand;
   private final DeleteCommand deleteCommand;
+  private final FindAllCommand findAllCommand;
 
   public RnRecordModule(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -31,6 +25,7 @@ public class RnRecordModule extends ReactContextBaseJavaModule {
     saveCommand = new SaveCommand(reactContext);
     updateCommand = new UpdateCommand(reactContext);
     deleteCommand = new DeleteCommand(reactContext);
+    findAllCommand = new FindAllCommand(reactContext);
   }
 
   @Override
@@ -55,7 +50,7 @@ public class RnRecordModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void findAll(String tableName, Promise promise) {
-
+    findAllCommand.findAll(tableName, promise);
   }
 
   @ReactMethod
