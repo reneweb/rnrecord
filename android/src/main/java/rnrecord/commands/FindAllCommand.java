@@ -32,7 +32,7 @@ public class FindAllCommand {
                         .getInstance(reactContext)
                         .getWritableDatabase();
 
-                promise.resolve(transformQueryResults(db.rawQuery("select * from ?", new String[] {tableName} )));
+                promise.resolve(transformQueryResults(db.rawQuery("select * from " + tableName, null)));
 
             }
         }.execute();
@@ -42,7 +42,7 @@ public class FindAllCommand {
         WritableNativeArray result = new WritableNativeArray();
         while(cursor.moveToNext()) {
             WritableNativeArray row = new WritableNativeArray();
-            for (int i = 0; i < cursor.getCount(); i++) {
+            for (int i = 0; i < cursor.getColumnCount(); i++) {
                 row.pushString(cursor.getString(i));
             }
             result.pushArray(row);

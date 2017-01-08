@@ -27,8 +27,8 @@ public class FindCommand {
 
     public void find(String tableName, ReadableMap query, Promise promise) {
         List<String> queryKeys = getQueryKeys(query);
-        String queryString = buildQuery(queryKeys).toString();
-        ArrayList<String> queryArguments = buildQueryArgument(tableName, queryKeys, query);
+        String queryString = buildQuery(tableName, queryKeys).toString();
+        ArrayList<String> queryArguments = buildQueryArgument(queryKeys, query);
 
         executeDbCallsAsync(queryString, queryArguments, promise);
     }
@@ -51,7 +51,7 @@ public class FindCommand {
         WritableNativeArray result = new WritableNativeArray();
         while(cursor.moveToNext()) {
             WritableNativeArray row = new WritableNativeArray();
-            for (int i = 0; i < cursor.getCount(); i++) {
+            for (int i = 0; i < cursor.getColumnCount(); i++) {
                 row.pushString(cursor.getString(i));
             }
             result.pushArray(row);
@@ -62,9 +62,8 @@ public class FindCommand {
         return result;
     }
 
-    private ArrayList<String> buildQueryArgument(String tableName, List<String> keys, ReadableMap query) {
+    private ArrayList<String> buildQueryArgument(List<String> keys, ReadableMap query) {
         final ArrayList<String> arguments = new ArrayList<>();
-        arguments.add(tableName);
 
         for (String key : keys) {
             ReadableType type = query.getType(key);
@@ -80,8 +79,8 @@ public class FindCommand {
         return arguments;
     }
 
-    private StringBuilder buildQuery(List<String> keys) {
-        final StringBuilder queryBuilder = new StringBuilder("SELECT * from ? WHERE ");
+    private StringBuilder buildQuery(String tableName, List<String> keys) {
+        final StringBuilder queryBuilder = new StringBuilder("SELECT * from " + tableName + " WHERE ");
         for (int i = 0, keysSize = keys.size(); i < keysSize; i++) {
             String key = keys.get(i);
             queryBuilder.append(key).append(" = ? ");
