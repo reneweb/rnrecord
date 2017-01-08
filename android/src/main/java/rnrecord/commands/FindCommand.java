@@ -85,7 +85,7 @@ public class FindCommand {
         for (int i = 0, keysSize = keys.size(); i < keysSize; i++) {
             String key = keys.get(i);
             queryBuilder.append(key).append(" = ? ");
-            if(i < keys.size()) {
+            if(i < keys.size() - 1) {
                 queryBuilder.append("AND ");
             }
         }
