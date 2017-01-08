@@ -7,15 +7,18 @@ export default class RnRecord {
     id: Number;
 
     save(): Promise<Number> {
-        return NativeRnRecord.save(this.constructor.name, this._getProperties());
+        return NativeRnRecord.save(this.constructor.name, this._getProperties()).then(id => {
+          this.id = id;
+          return id;
+        });
     }
 
     update(): Promise<Boolean> {
-        return NativeRnRecord.update(this.constructor.name, this._getProperties());
+        return NativeRnRecord.update(this.constructor.name, this._getProperties()).then(res => res != -1);
     }
 
     remove(): Promise<Boolean> {
-        return NativeRnRecord.remove(this.constructor.name, this._getProperties());
+        return NativeRnRecord.remove(this.constructor.name, this._getProperties()).then(res => res != -1);
     }
 
     static findAll(): Promise<Array> {
