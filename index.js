@@ -6,32 +6,31 @@ const NativeRnRecord = NativeModules.RnRecord;
 export default class RnRecord {
     id: Number;
 
-    save(): Number {
+    save(): Promise<Number> {
         return NativeRnRecord.save(this.constructor.name, this._getProperties());
     }
 
-    update(): Boolean {
+    update(): Promise<Boolean> {
         return NativeRnRecord.update(this.constructor.name, this._getProperties());
     }
 
-    remove(): Boolean {
+    remove(): Promise<Boolean> {
         return NativeRnRecord.remove(this.constructor.name, this._getProperties());
     }
 
-    static findAll(): Array {
-        return NativeRnRecord.findAll(this.name).map(rec => this._transformResultObj(this.name, rec));
+    static findAll(): Promise<Array> {
+        return NativeRnRecord.findAll(this.name).then(records => records.map(rec => this._transformResultObj(this.name, rec)));
     }
 
-    static find(query: Object): Array {
-        return NativeRnRecord.find(this.name, query).map(rec => this_.transformResultObj(this.name, rec));
+    static find(query: Object): Promise<Array> {
+        return NativeRnRecord.find(this.name, query).then(records => records.map(rec => this._transformResultObj(this.name, rec)));
     }
 
-    _transformResultObj(className: String, obj: Object) {
-        const inst = new className;
+    static _transformResultObj(className: String, obj: Object) {
+        const inst = new this();
         Object.getOwnPropertyNames(obj).forEach(k => {
             inst[k] = obj[k];
         });
-
         return inst;
     }
 

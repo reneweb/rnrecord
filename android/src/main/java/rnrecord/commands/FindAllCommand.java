@@ -8,6 +8,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableNativeArray;
+import com.facebook.react.bridge.WritableNativeMap;
 import rnrecord.RnRecordSQLiteHelper;
 
 /**
@@ -41,11 +42,11 @@ public class FindAllCommand {
     private ReadableArray transformQueryResults(Cursor cursor) {
         WritableNativeArray result = new WritableNativeArray();
         while(cursor.moveToNext()) {
-            WritableNativeArray row = new WritableNativeArray();
+            WritableNativeMap row = new WritableNativeMap();
             for (int i = 0; i < cursor.getColumnCount(); i++) {
-                row.pushString(cursor.getString(i));
+                row.putString(cursor.getColumnName(i), cursor.getString(i));
             }
-            result.pushArray(row);
+            result.pushMap(row);
         }
 
         cursor.close();
