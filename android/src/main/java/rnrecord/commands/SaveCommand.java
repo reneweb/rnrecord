@@ -27,15 +27,13 @@ public class SaveCommand {
     public void save(final String tableName, ReadableMap props, final Promise promise) {
         List<String> keys = getPropKeys(props);
 
-        final String createQuery = buildCreateQuery(props, keys).toString();
-        final ArrayList<String> createQueryArguments = buildCreateQueryArgument(tableName, keys);
-
+        final String createQuery = buildCreateQuery(tableName, props, keys).toString();
         final ContentValues contentValues = prepareInsertContentValues(props, keys);
 
-        executeDbCallsAsync(tableName, promise, createQuery, createQueryArguments, contentValues);
+        executeDbCallsAsync(tableName, promise, createQuery, contentValues);
     }
 
-    private void executeDbCallsAsync(final String tableName, final Promise promise, final String createQuery, final ArrayList<String> createQueryArguments, final ContentValues contentValues) {
+    private void executeDbCallsAsync(final String tableName, final Promise promise, final String createQuery, final ContentValues contentValues) {
         new GuardedAsyncTask(reactContext) {
             @Override
             protected void doInBackgroundGuarded(Object[] params) {
@@ -43,8 +41,8 @@ public class SaveCommand {
                         .getInstance(reactContext)
                         .getWritableDatabase();
 
-                db.execSQL(createQuery, createQueryArguments.toArray());
-                promise.resolve(db.insert(tableName, null, contentValues));
+                db.execSQL(createQuery);
+                promise.resolve((double)db.insert(tableName, null, contentValues));
 
             }
         }.execute();
@@ -64,17 +62,10 @@ public class SaveCommand {
         return contentValues;
     }
 
-    private ArrayList<String> buildCreateQueryArgument(String tableName, List<String> keys) {
-        final ArrayList<String> arguments = new ArrayList<>();
-        arguments.add(tableName);
-        arguments.addAll(keys);
-        return arguments;
-    }
-
-    private StringBuilder buildCreateQuery(ReadableMap props, List<String> keys) {
-        final StringBuilder queryBuilder = new StringBuilder("CREATE TABLE IF NOT EXISTS ? ");
+    private StringBuilder buildCreateQuery(String tableName, ReadableMap props, List<String> keys) {
+        final StringBuilder queryBuilder = new StringBuilder("CREATE TABLE IF NOT EXISTS ").append(tableName).append(" ");
         queryBuilder.append("(");
-        queryBuilder.append("id INTEGER ");
+        queryBuilder.append("id INTEGER PRIMARY KEY AUTOINCREMENT");
         for (String key : keys) {
             String propType = null;
             if(props.getType(key) == ReadableType.Boolean) {
@@ -86,7 +77,7 @@ public class SaveCommand {
             }
 
             if(propType != null) {
-                queryBuilder.append(", ? ").append(propType).append(", ");
+                queryBuilder.append(", ").append(key).append(" ").append(propType);
             }
         }
         queryBuilder.append(")");
