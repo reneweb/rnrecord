@@ -19,7 +19,7 @@ click the + symbol, search for libsqlite3.tbd and choose that library.
 
 ### Usage
 
-```
+```javascript
 import RnRecord from 'rnrecord';
 
 class Person extends RnRecord {
