@@ -26,7 +26,7 @@
         
         sqlite3_stmt *insertStatement = [rnRecordSQLite prepareStatement:insertQuery withArguments:[props allValues] withDB:db];
         if (sqlite3_step(insertStatement) == SQLITE_DONE) {
-            resolve(@(sqlite3_changes(db)));
+            resolve(@(sqlite3_last_insert_rowid(db)));
         } else {
             reject(RCTErrorUnspecified, @"Failed to insert data.", nil);
         }
