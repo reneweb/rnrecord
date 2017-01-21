@@ -4,4 +4,3 @@
 @interface RnRecord : NSObject <RCTBridgeModule>
 
 @end
-  

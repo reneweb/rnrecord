@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		97194A411E22CEE400864717 /* RnRecordSQLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 97194A401E22CEE400864717 /* RnRecordSQLite.m */; };
+		97847CA41E2D8FF400C665CA /* DeleteCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 97847C9B1E2D8FF400C665CA /* DeleteCommand.m */; };
+		97847CA51E2D8FF400C665CA /* FindAllCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 97847C9D1E2D8FF400C665CA /* FindAllCommand.m */; };
+		97847CA61E2D8FF400C665CA /* FindCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 97847C9F1E2D8FF400C665CA /* FindCommand.m */; };
+		97847CA71E2D8FF400C665CA /* SaveCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 97847CA11E2D8FF400C665CA /* SaveCommand.m */; };
+		97847CA81E2D8FF400C665CA /* UpdateCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 97847CA31E2D8FF400C665CA /* UpdateCommand.m */; };
 		B3E7B58A1CC2AC0600A0062D /* RnRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RnRecord.m */; };
 /* End PBXBuildFile section */
 
@@ -27,7 +32,16 @@
 		134814201AA4EA6300B7C361 /* libRnRecord.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRnRecord.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		97194A401E22CEE400864717 /* RnRecordSQLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RnRecordSQLite.m; sourceTree = "<group>"; };
 		97194A421E22CEEF00864717 /* RnRecordSQLite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RnRecordSQLite.h; sourceTree = "<group>"; };
-		97194A451E22CFC700864717 /* commands */ = {isa = PBXFileReference; lastKnownFileType = folder; path = commands; sourceTree = "<group>"; };
+		97847C9A1E2D8FF400C665CA /* DeleteCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteCommand.h; sourceTree = "<group>"; };
+		97847C9B1E2D8FF400C665CA /* DeleteCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteCommand.m; sourceTree = "<group>"; };
+		97847C9C1E2D8FF400C665CA /* FindAllCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindAllCommand.h; sourceTree = "<group>"; };
+		97847C9D1E2D8FF400C665CA /* FindAllCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindAllCommand.m; sourceTree = "<group>"; };
+		97847C9E1E2D8FF400C665CA /* FindCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindCommand.h; sourceTree = "<group>"; };
+		97847C9F1E2D8FF400C665CA /* FindCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindCommand.m; sourceTree = "<group>"; };
+		97847CA01E2D8FF400C665CA /* SaveCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveCommand.h; sourceTree = "<group>"; };
+		97847CA11E2D8FF400C665CA /* SaveCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveCommand.m; sourceTree = "<group>"; };
+		97847CA21E2D8FF400C665CA /* UpdateCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateCommand.h; sourceTree = "<group>"; };
+		97847CA31E2D8FF400C665CA /* UpdateCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateCommand.m; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RnRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RnRecord.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RnRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RnRecord.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,7 +68,16 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				97194A451E22CFC700864717 /* commands */,
+				97847C9A1E2D8FF400C665CA /* DeleteCommand.h */,
+				97847C9B1E2D8FF400C665CA /* DeleteCommand.m */,
+				97847C9C1E2D8FF400C665CA /* FindAllCommand.h */,
+				97847C9D1E2D8FF400C665CA /* FindAllCommand.m */,
+				97847C9E1E2D8FF400C665CA /* FindCommand.h */,
+				97847C9F1E2D8FF400C665CA /* FindCommand.m */,
+				97847CA01E2D8FF400C665CA /* SaveCommand.h */,
+				97847CA11E2D8FF400C665CA /* SaveCommand.m */,
+				97847CA21E2D8FF400C665CA /* UpdateCommand.h */,
+				97847CA31E2D8FF400C665CA /* UpdateCommand.m */,
 				97194A421E22CEEF00864717 /* RnRecordSQLite.h */,
 				97194A401E22CEE400864717 /* RnRecordSQLite.m */,
 				B3E7B5881CC2AC0600A0062D /* RnRecord.h */,
@@ -119,8 +142,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97847CA51E2D8FF400C665CA /* FindAllCommand.m in Sources */,
 				97194A411E22CEE400864717 /* RnRecordSQLite.m in Sources */,
+				97847CA71E2D8FF400C665CA /* SaveCommand.m in Sources */,
+				97847CA81E2D8FF400C665CA /* UpdateCommand.m in Sources */,
+				97847CA61E2D8FF400C665CA /* FindCommand.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RnRecord.m in Sources */,
+				97847CA41E2D8FF400C665CA /* DeleteCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,7 +239,10 @@
 					"$(SRCROOT)/../../react-native/React/**",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lsqlite",
+				);
 				PRODUCT_NAME = RnRecord;
 				SKIP_INSTALL = YES;
 			};
@@ -227,7 +258,10 @@
 					"$(SRCROOT)/../../react-native/React/**",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lsqlite",
+				);
 				PRODUCT_NAME = RnRecord;
 				SKIP_INSTALL = YES;
 			};
