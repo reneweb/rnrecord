@@ -1,7 +1,7 @@
 {
   "name": "rnrecord",
   "version": "0.0.2",
-  "description": "",
+  "description": "A active record library for react native",
   "main": "index.js",
   "keywords": [
     "react-native",
@@ -11,6 +11,10 @@
   ],
   "author": "reneweb",
   "license": "Apache-2.0",
+  "repository" :{
+    "type" : "git",
+    "url" : "https://github.com/reneweb/rnrecord"
+  },
   "peerDependencies": {
     "react-native": ">=0.38.0"
   },
