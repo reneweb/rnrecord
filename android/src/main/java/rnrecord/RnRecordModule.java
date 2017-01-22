@@ -24,11 +24,13 @@ public class RnRecordModule extends ReactContextBaseJavaModule {
   public RnRecordModule(ReactApplicationContext reactContext) {
     super(reactContext);
     this.reactContext = reactContext;
-    saveCommand = new SaveCommand(reactContext);
-    updateCommand = new UpdateCommand(reactContext);
-    deleteCommand = new DeleteCommand(reactContext);
-    findAllCommand = new FindAllCommand(reactContext);
-    findCommand = new FindCommand(reactContext);
+
+    RnRecordSQLiteHelper rnRecordSQLiteHelper = new RnRecordSQLiteHelper(reactContext);
+    saveCommand = new SaveCommand(reactContext, rnRecordSQLiteHelper);
+    updateCommand = new UpdateCommand(reactContext, rnRecordSQLiteHelper);
+    deleteCommand = new DeleteCommand(reactContext, rnRecordSQLiteHelper);
+    findAllCommand = new FindAllCommand(reactContext, rnRecordSQLiteHelper);
+    findCommand = new FindCommand(reactContext, rnRecordSQLiteHelper);
   }
 
   @Override

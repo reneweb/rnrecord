@@ -19,9 +19,11 @@ import java.util.List;
 public class SaveCommand {
 
     private ReactContext reactContext;
+    private RnRecordSQLiteHelper rnRecordSQLiteHelper;
 
-    public SaveCommand(ReactContext reactContext) {
+    public SaveCommand(ReactContext reactContext, RnRecordSQLiteHelper rnRecordSQLiteHelper) {
         this.reactContext = reactContext;
+        this.rnRecordSQLiteHelper = rnRecordSQLiteHelper;
     }
 
     public void save(final String tableName, ReadableMap props, final Promise promise) {
@@ -37,9 +39,7 @@ public class SaveCommand {
         new GuardedAsyncTask(reactContext) {
             @Override
             protected void doInBackgroundGuarded(Object[] params) {
-                SQLiteDatabase db = RnRecordSQLiteHelper
-                        .getInstance(reactContext)
-                        .getWritableDatabase();
+                SQLiteDatabase db = rnRecordSQLiteHelper.getWritableDatabase();
 
                 db.execSQL(createQuery);
                 promise.resolve((double)db.insert(tableName, null, contentValues));

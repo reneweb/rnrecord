@@ -12,9 +12,11 @@ import rnrecord.RnRecordSQLiteHelper;
  */
 public class DeleteCommand {
     private ReactApplicationContext reactContext;
+    private RnRecordSQLiteHelper rnRecordSQLiteHelper;
 
-    public DeleteCommand(ReactApplicationContext reactContext) {
+    public DeleteCommand(ReactApplicationContext reactContext, RnRecordSQLiteHelper rnRecordSQLiteHelper) {
         this.reactContext = reactContext;
+        this.rnRecordSQLiteHelper = rnRecordSQLiteHelper;
     }
 
     public void delete(String tableName, ReadableMap props, Promise promise) {
@@ -26,9 +28,7 @@ public class DeleteCommand {
         new GuardedAsyncTask(reactContext) {
             @Override
             protected void doInBackgroundGuarded(Object[] params) {
-                SQLiteDatabase db = RnRecordSQLiteHelper
-                        .getInstance(reactContext)
-                        .getWritableDatabase();
+                SQLiteDatabase db = rnRecordSQLiteHelper.getWritableDatabase();
 
                 promise.resolve(db.delete(tableName, "id = ?", new String[] {String.valueOf(id)} ));
 

@@ -10,20 +10,10 @@ import android.util.Log;
  */
 public class RnRecordSQLiteHelper extends SQLiteOpenHelper {
 
-    private static RnRecordSQLiteHelper mInstance = null;
-
     private static final String DATABASE_NAME = "rnrecord";
     private static final int DATABASE_VERSION = 1;
 
-    public static RnRecordSQLiteHelper getInstance(Context ctx) {
-
-        if (mInstance == null) {
-            mInstance = new RnRecordSQLiteHelper(ctx.getApplicationContext());
-        }
-        return mInstance;
-    }
-
-    private RnRecordSQLiteHelper(Context context) {
+    public RnRecordSQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

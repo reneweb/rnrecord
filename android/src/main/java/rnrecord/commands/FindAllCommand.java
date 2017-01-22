@@ -2,13 +2,13 @@ package rnrecord.commands;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.GuardedAsyncTask;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableArray;
-import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.bridge.WritableNativeArray;
-import com.facebook.react.bridge.WritableNativeMap;
+import com.facebook.react.bridge.WritableArray;
+import com.facebook.react.bridge.WritableMap;
 import rnrecord.RnRecordSQLiteHelper;
 
 /**
@@ -16,9 +16,11 @@ import rnrecord.RnRecordSQLiteHelper;
  */
 public class FindAllCommand {
     private ReactApplicationContext reactContext;
+    private RnRecordSQLiteHelper rnRecordSQLiteHelper;
 
-    public FindAllCommand(ReactApplicationContext reactContext) {
+    public FindAllCommand(ReactApplicationContext reactContext, RnRecordSQLiteHelper rnRecordSQLiteHelper) {
         this.reactContext = reactContext;
+        this.rnRecordSQLiteHelper = rnRecordSQLiteHelper;
     }
 
     public void findAll(String tableName, Promise promise) {
@@ -29,9 +31,7 @@ public class FindAllCommand {
         new GuardedAsyncTask(reactContext) {
             @Override
             protected void doInBackgroundGuarded(Object[] params) {
-                SQLiteDatabase db = RnRecordSQLiteHelper
-                        .getInstance(reactContext)
-                        .getWritableDatabase();
+                SQLiteDatabase db = rnRecordSQLiteHelper.getWritableDatabase();
 
                 promise.resolve(transformQueryResults(db.rawQuery("select * from " + tableName, null)));
 
@@ -40,9 +40,9 @@ public class FindAllCommand {
     }
 
     private ReadableArray transformQueryResults(Cursor cursor) {
-        WritableNativeArray result = new WritableNativeArray();
+        WritableArray result = Arguments.createArray();
         while(cursor.moveToNext()) {
-            WritableNativeMap row = new WritableNativeMap();
+            WritableMap row = Arguments.createMap();
             for (int i = 0; i < cursor.getColumnCount(); i++) {
                 row.putString(cursor.getColumnName(i), cursor.getString(i));
             }

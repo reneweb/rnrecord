@@ -18,9 +18,11 @@ import java.util.List;
  */
 public class UpdateCommand {
     private ReactApplicationContext reactContext;
+    private RnRecordSQLiteHelper rnRecordSQLiteHelper;
 
-    public UpdateCommand(ReactApplicationContext reactContext) {
+    public UpdateCommand(ReactApplicationContext reactContext, RnRecordSQLiteHelper rnRecordSQLiteHelper) {
         this.reactContext = reactContext;
+        this.rnRecordSQLiteHelper = rnRecordSQLiteHelper;
     }
 
     public void update(String tableName, ReadableMap props, Promise promise) {
@@ -33,9 +35,7 @@ public class UpdateCommand {
         new GuardedAsyncTask(reactContext) {
             @Override
             protected void doInBackgroundGuarded(Object[] params) {
-                SQLiteDatabase db = RnRecordSQLiteHelper
-                        .getInstance(reactContext)
-                        .getWritableDatabase();
+                SQLiteDatabase db = rnRecordSQLiteHelper.getWritableDatabase();
 
                 promise.resolve(db.update(tableName, contentValues, "id = ?", new String[] {contentValues.getAsString("id")} ));
 
